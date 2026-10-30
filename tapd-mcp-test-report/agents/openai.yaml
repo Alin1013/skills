@@ -1,0 +1,4 @@
+interface:
+  display_name: "TAPD MCP 测试报告"
+  short_description: "通过 TAPD MCP 生成项目迭代 HTML 测试报告"
+  default_prompt: "Use $tapd-mcp-test-report to generate a detailed HTML test report through TAPD MCP for the project and iteration I specify."

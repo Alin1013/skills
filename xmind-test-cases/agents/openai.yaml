@@ -1,0 +1,4 @@
+interface:
+  display_name: "XMind 测试用例"
+  short_description: "把 XMind 测试点转换为可评审的 Excel 功能测试用例"
+  default_prompt: "Use $xmind-test-cases to turn this XMind file into reviewable functional test cases and deliver a validated Excel workbook."

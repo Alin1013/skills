@@ -1,15 +1,15 @@
 ---
 name: tapd-mcp-test-report
-description: Use when the user wants a detailed iteration-level TAPD test report in standalone HTML from a project and iteration they identify, including requirement, bug, bug-field, and test-case statistics read through the connected TAPD MCP.
+description: Use when the user wants a detailed iteration-level TAPD test report in standalone HTML from TAPD workspace 30676045 and an iteration they identify, including requirement, bug, bug-field, and test-case statistics read through the connected TAPD MCP.
 ---
 
 # TAPD MCP Test Report
 
-Produce a detailed, evidence-based Chinese HTML report from the TAPD project space and iteration the user supplies. Use only the connected `mcp__tapd__*` read tools; this skill is read-only and never creates or changes TAPD records. The referenced server implementation is [TencentCloudCommunity/mcp-server-tapd](https://github.com/TencentCloudCommunity/mcp-server/tree/main/src/mcp-server-tapd).
+Produce a detailed, evidence-based Chinese HTML report from TAPD workspace `30676045` and the iteration the user supplies. Use only the connected `mcp__tapd__*` read tools; this skill is read-only and never creates or changes TAPD records. The referenced server implementation is [TencentCloudCommunity/mcp-server-tapd](https://github.com/TencentCloudCommunity/mcp-server/tree/main/src/mcp-server-tapd).
 
 ## Run
 
-1. Confirm the requested workspace and iteration identifiers or exact names. If either name resolves to multiple candidates, show the candidates and ask the user to choose before querying report data. Record the resolved IDs and names as the report scope.
+1. Use fixed `workspace_id=30676045` as the report scope unless the user explicitly provides a different TAPD workspace ID. Do not ask for the project ID when it is omitted. Resolve the requested iteration identifier or exact name from live MCP results; if it resolves to multiple candidates, show the candidates and ask the user to choose before querying report data. Record the resolved workspace and iteration IDs and names as the report scope.
 2. Confirm that the connected `mcp__tapd__*` tools are available. Use only read tools such as `get_workspace_info`, `get_iterations`, `get_story_or_task_count`, `get_stories_or_tasks`, `get_bug_count`, `get_bug`, `get_entity_custom_fields`, `get_entity_relations`, and `get_tcases`. If TAPD MCP is unavailable, stop and explain the missing connection; do not fall back to raw API calls or user-provided credentials.
 3. Resolve the workspace and iteration from live MCP results. Query iteration-scoped stories and bugs, then fetch every page until the advertised MCP count, fetched row count, and unique ID count agree. Keep the iteration filter on every query that supports it. If a query does not support iteration filtering, fetch workspace records and filter against the resolved iteration ID locally. Record the filter and disclose any unresolved mismatch before reporting a total.
 4. Discover story and bug field definitions with `get_entity_custom_fields` before querying custom fields. Also read story status options and labels with `get_stories_fields_info`; map each returned status code to the TAPD display label in requirement tables and summaries, rather than showing internal values such as `status_11`. Preserve raw values for auditability.
